@@ -14,6 +14,10 @@ class Activity extends Model
 
     public $table = 'activities';
 
+    public const DONE_RADIO = [
+        'done' => 'Done',
+    ];
+
     protected $dates = [
         'created_at',
         'updated_at',
@@ -26,6 +30,7 @@ class Activity extends Model
         'total_interact',
         'total_amount',
         'total_gas_spend',
+        'done',
         'created_at',
         'updated_at',
         'deleted_at',

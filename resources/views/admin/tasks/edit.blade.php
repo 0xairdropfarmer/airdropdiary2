@@ -70,6 +70,21 @@
                 <span class="help-block">{{ trans('cruds.task.fields.type_helper') }}</span>
             </div>
             <div class="form-group">
+                <label>{{ trans('cruds.task.fields.phase') }}</label>
+                @foreach(App\Models\Task::PHASE_RADIO as $key => $label)
+                    <div class="form-check {{ $errors->has('phase') ? 'is-invalid' : '' }}">
+                        <input class="form-check-input" type="radio" id="phase_{{ $key }}" name="phase" value="{{ $key }}" {{ old('phase', $task->phase) === (string) $key ? 'checked' : '' }}>
+                        <label class="form-check-label" for="phase_{{ $key }}">{{ $label }}</label>
+                    </div>
+                @endforeach
+                @if($errors->has('phase'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('phase') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.task.fields.phase_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

@@ -179,6 +179,8 @@ return [
             'updated_at_helper'  => ' ',
             'deleted_at'         => 'Deleted at',
             'deleted_at_helper'  => ' ',
+            'phase'              => 'Phase',
+            'phase_helper'       => ' ',
         ],
     ],
     'activity' => [
@@ -203,6 +205,8 @@ return [
             'total_amount_helper'    => ' ',
             'total_gas_spend'        => 'Total Gas Spend',
             'total_gas_spend_helper' => ' ',
+            'done'                   => 'Done',
+            'done_helper'            => ' ',
         ],
     ],
 

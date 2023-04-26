@@ -14,6 +14,7 @@ class CreateTasksTable extends Migration
             $table->longText('description')->nullable();
             $table->string('link')->nullable();
             $table->string('type')->nullable();
+            $table->string('phase')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

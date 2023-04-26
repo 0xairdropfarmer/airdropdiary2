@@ -66,6 +66,14 @@
                                         {{ $activity->total_gas_spend }}
                                     </td>
                                 </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.activity.fields.done') }}
+                                    </th>
+                                    <td>
+                                        {{ App\Models\Activity::DONE_RADIO[$activity->done] ?? '' }}
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <div class="form-group">

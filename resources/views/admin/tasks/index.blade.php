@@ -38,6 +38,9 @@
                             {{ trans('cruds.task.fields.type') }}
                         </th>
                         <th>
+                            {{ trans('cruds.task.fields.phase') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -62,6 +65,9 @@
                             </td>
                             <td>
                                 {{ App\Models\Task::TYPE_RADIO[$task->type] ?? '' }}
+                            </td>
+                            <td>
+                                {{ App\Models\Task::PHASE_RADIO[$task->phase] ?? '' }}
                             </td>
                             <td>
                                 @can('task_show')
