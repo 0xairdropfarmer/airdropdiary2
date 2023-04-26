@@ -41,6 +41,9 @@
                                         {{ trans('cruds.activity.fields.total_gas_spend') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.activity.fields.done') }}
+                                    </th>
+                                    <th>
                                         &nbsp;
                                     </th>
                                 </tr>
@@ -65,6 +68,9 @@
                                         </td>
                                         <td>
                                             {{ $activity->total_gas_spend ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ App\Models\Activity::DONE_RADIO[$activity->done] ?? '' }}
                                         </td>
                                         <td>
                                             @can('activity_show')

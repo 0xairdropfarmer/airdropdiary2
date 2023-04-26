@@ -63,6 +63,14 @@
                             {{ App\Models\Task::TYPE_RADIO[$task->type] ?? '' }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.task.fields.phase') }}
+                        </th>
+                        <td>
+                            {{ App\Models\Task::PHASE_RADIO[$task->phase] ?? '' }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

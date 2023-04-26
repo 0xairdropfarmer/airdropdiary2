@@ -28,6 +28,11 @@ class Task extends Model implements HasMedia
         'deleted_at',
     ];
 
+    public const PHASE_RADIO = [
+        'testnet' => 'testnet',
+        'mainnet' => 'mainnet',
+    ];
+
     public const TYPE_RADIO = [
         'onetime'   => 'one time',
         'recurring' => 'Recurring',
@@ -39,6 +44,7 @@ class Task extends Model implements HasMedia
         'description',
         'link',
         'type',
+        'phase',
         'created_at',
         'updated_at',
         'deleted_at',

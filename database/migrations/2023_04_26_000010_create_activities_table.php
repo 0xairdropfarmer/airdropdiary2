@@ -13,6 +13,7 @@ class CreateActivitiesTable extends Migration
             $table->integer('total_interact')->nullable();
             $table->float('total_amount', 15, 2)->nullable();
             $table->float('total_gas_spend', 15, 2)->nullable();
+            $table->string('done')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

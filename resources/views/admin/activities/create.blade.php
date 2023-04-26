@@ -68,6 +68,21 @@
                 <span class="help-block">{{ trans('cruds.activity.fields.total_gas_spend_helper') }}</span>
             </div>
             <div class="form-group">
+                <label>{{ trans('cruds.activity.fields.done') }}</label>
+                @foreach(App\Models\Activity::DONE_RADIO as $key => $label)
+                    <div class="form-check {{ $errors->has('done') ? 'is-invalid' : '' }}">
+                        <input class="form-check-input" type="radio" id="done_{{ $key }}" name="done" value="{{ $key }}" {{ old('done', 'notdone') === (string) $key ? 'checked' : '' }}>
+                        <label class="form-check-label" for="done_{{ $key }}">{{ $label }}</label>
+                    </div>
+                @endforeach
+                @if($errors->has('done'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('done') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.activity.fields.done_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>
