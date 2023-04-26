@@ -17,6 +17,11 @@ class Project extends Model implements HasMedia
 
     public $table = 'projects';
 
+    protected $appends = [
+        'logo',
+        'cover',
+    ];
+
     public const LIVE_RADIO = [
         'yup'  => 'yup',
         'nope' => 'nope',
@@ -74,5 +79,29 @@ class Project extends Model implements HasMedia
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function getLogoAttribute()
+    {
+        $file = $this->getMedia('logo')->last();
+        if ($file) {
+            $file->url       = $file->getUrl();
+            $file->thumbnail = $file->getUrl('thumb');
+            $file->preview   = $file->getUrl('preview');
+        }
+
+        return $file;
+    }
+
+    public function getCoverAttribute()
+    {
+        $file = $this->getMedia('cover')->last();
+        if ($file) {
+            $file->url       = $file->getUrl();
+            $file->thumbnail = $file->getUrl('thumb');
+            $file->preview   = $file->getUrl('preview');
+        }
+
+        return $file;
     }
 }

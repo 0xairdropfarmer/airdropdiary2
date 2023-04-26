@@ -117,6 +117,10 @@ return [
             'categories_helper'  => ' ',
             'tag'                => 'Tag',
             'tag_helper'         => ' ',
+            'logo'               => 'Logo',
+            'logo_helper'        => ' ',
+            'cover'              => 'Cover',
+            'cover_helper'       => ' ',
         ],
     ],
     'category' => [
