@@ -23,7 +23,7 @@ class ProjectController extends Controller
     {
         abort_if(Gate::denies('project_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $projects = Project::with(['categories', 'tags'])->get();
+        $projects = Project::with(['categories', 'tags', 'media'])->get();
 
         $categories = Category::get();
 
@@ -48,6 +48,14 @@ class ProjectController extends Controller
         $project = Project::create($request->all());
         $project->categories()->sync($request->input('categories', []));
         $project->tags()->sync($request->input('tags', []));
+        if ($request->input('logo', false)) {
+            $project->addMedia(storage_path('tmp/uploads/' . basename($request->input('logo'))))->toMediaCollection('logo');
+        }
+
+        if ($request->input('cover', false)) {
+            $project->addMedia(storage_path('tmp/uploads/' . basename($request->input('cover'))))->toMediaCollection('cover');
+        }
+
         if ($media = $request->input('ck-media', false)) {
             Media::whereIn('id', $media)->update(['model_id' => $project->id]);
         }
@@ -73,6 +81,27 @@ class ProjectController extends Controller
         $project->update($request->all());
         $project->categories()->sync($request->input('categories', []));
         $project->tags()->sync($request->input('tags', []));
+        if ($request->input('logo', false)) {
+            if (! $project->logo || $request->input('logo') !== $project->logo->file_name) {
+                if ($project->logo) {
+                    $project->logo->delete();
+                }
+                $project->addMedia(storage_path('tmp/uploads/' . basename($request->input('logo'))))->toMediaCollection('logo');
+            }
+        } elseif ($project->logo) {
+            $project->logo->delete();
+        }
+
+        if ($request->input('cover', false)) {
+            if (! $project->cover || $request->input('cover') !== $project->cover->file_name) {
+                if ($project->cover) {
+                    $project->cover->delete();
+                }
+                $project->addMedia(storage_path('tmp/uploads/' . basename($request->input('cover'))))->toMediaCollection('cover');
+            }
+        } elseif ($project->cover) {
+            $project->cover->delete();
+        }
 
         return redirect()->route('frontend.projects.index');
     }

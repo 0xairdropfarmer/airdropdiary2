@@ -43,6 +43,12 @@
                             {{ trans('cruds.project.fields.tag') }}
                         </th>
                         <th>
+                            {{ trans('cruds.project.fields.logo') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.project.fields.cover') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -77,6 +83,20 @@
                                 @foreach($project->tags as $key => $item)
                                     <span class="badge badge-info">{{ $item->name }}</span>
                                 @endforeach
+                            </td>
+                            <td>
+                                @if($project->logo)
+                                    <a href="{{ $project->logo->getUrl() }}" target="_blank" style="display: inline-block">
+                                        <img src="{{ $project->logo->getUrl('thumb') }}">
+                                    </a>
+                                @endif
+                            </td>
+                            <td>
+                                @if($project->cover)
+                                    <a href="{{ $project->cover->getUrl() }}" target="_blank" style="display: inline-block">
+                                        <img src="{{ $project->cover->getUrl('thumb') }}">
+                                    </a>
+                                @endif
                             </td>
                             <td>
                                 @can('project_show')
