@@ -66,6 +66,11 @@ class Task extends Model implements HasMedia
         return $this->hasMany(Activity::class, 'task_id', 'id');
     }
 
+    public function taskRecurringActivities()
+    {
+        return $this->hasMany(RecurringActivity::class, 'task_id', 'id');
+    }
+
     public function project()
     {
         return $this->belongsTo(Project::class, 'project_id');
