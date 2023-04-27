@@ -70,6 +70,11 @@ class User extends Authenticatable
         return $this->hasMany(Activity::class, 'user_id', 'id');
     }
 
+    public function userRecurringActivities()
+    {
+        return $this->hasMany(RecurringActivity::class, 'user_id', 'id');
+    }
+
     public function getEmailVerifiedAtAttribute($value)
     {
         return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('panel.date_format') . ' ' . config('panel.time_format')) : null;

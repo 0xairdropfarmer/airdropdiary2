@@ -48,6 +48,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('activities/destroy', 'ActivityController@massDestroy')->name('activities.massDestroy');
     Route::resource('activities', 'ActivityController');
 
+    // Recurring Activity
+    Route::delete('recurring-activities/destroy', 'RecurringActivityController@massDestroy')->name('recurring-activities.massDestroy');
+    Route::resource('recurring-activities', 'RecurringActivityController');
+
     Route::get('global-search', 'GlobalSearchController@search')->name('globalSearch');
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
@@ -101,6 +105,10 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
     // Activity
     Route::delete('activities/destroy', 'ActivityController@massDestroy')->name('activities.massDestroy');
     Route::resource('activities', 'ActivityController');
+
+    // Recurring Activity
+    Route::delete('recurring-activities/destroy', 'RecurringActivityController@massDestroy')->name('recurring-activities.massDestroy');
+    Route::resource('recurring-activities', 'RecurringActivityController');
 
     Route::get('frontend/profile', 'ProfileController@index')->name('profile.index');
     Route::post('frontend/profile', 'ProfileController@update')->name('profile.update');

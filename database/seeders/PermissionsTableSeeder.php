@@ -184,6 +184,26 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 44,
+                'title' => 'recurring_activity_create',
+            ],
+            [
+                'id'    => 45,
+                'title' => 'recurring_activity_edit',
+            ],
+            [
+                'id'    => 46,
+                'title' => 'recurring_activity_show',
+            ],
+            [
+                'id'    => 47,
+                'title' => 'recurring_activity_delete',
+            ],
+            [
+                'id'    => 48,
+                'title' => 'recurring_activity_access',
+            ],
+            [
+                'id'    => 49,
                 'title' => 'profile_password_edit',
             ],
         ];

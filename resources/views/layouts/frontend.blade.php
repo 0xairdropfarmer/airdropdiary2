@@ -122,6 +122,11 @@
                                             {{ trans('cruds.activity.title') }}
                                         </a>
                                     @endcan
+                                    @can('recurring_activity_access')
+                                        <a class="dropdown-item" href="{{ route('frontend.recurring-activities.index') }}">
+                                            {{ trans('cruds.recurringActivity.title') }}
+                                        </a>
+                                    @endcan
 
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
