@@ -38,14 +38,14 @@
                 <span class="help-block">{{ trans('cruds.activity.fields.task_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="total_interact">{{ trans('cruds.activity.fields.total_interact') }}</label>
-                <input class="form-control {{ $errors->has('total_interact') ? 'is-invalid' : '' }}" type="number" name="total_interact" id="total_interact" value="{{ old('total_interact', '') }}" step="1">
-                @if($errors->has('total_interact'))
+                <label for="note">{{ trans('cruds.activity.fields.note') }}</label>
+                <textarea class="form-control {{ $errors->has('note') ? 'is-invalid' : '' }}"   name="note" id="note" v >{{ old('note', '') }}</textarea>
+                @if($errors->has('note'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('total_interact') }}
+                        {{ $errors->first('note') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.activity.fields.total_interact_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.activity.fields.note_helper') }}</span>
             </div>
             <div class="form-group">
                 <label for="total_amount">{{ trans('cruds.activity.fields.total_amount') }}</label>

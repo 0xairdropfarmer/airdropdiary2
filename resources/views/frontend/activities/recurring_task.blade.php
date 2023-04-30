@@ -5,25 +5,16 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    {{ trans('cruds.activity.title_singular') }} {{ trans('global.list') }}
+                  Show all task for {{ request('name') }}
                 </div>
 
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class=" table table-bordered table-striped table-hover datatable datatable-Activity">
                             <thead>
-                                <tr>
+                                <tr> 
                                     <th>
-                                        {{ trans('cruds.activity.fields.id') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.activity.fields.user') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.activity.fields.task') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.activity.fields.total_interact') }}
+                                        ทำไปเมื่อวันที่
                                     </th>
                                     <th>
                                         {{ trans('cruds.activity.fields.total_amount') }}
@@ -31,9 +22,7 @@
                                     <th>
                                         {{ trans('cruds.activity.fields.total_gas_spend') }}
                                     </th>
-                                    <th>
-                                        {{ trans('cruds.activity.fields.done') }}
-                                    </th>
+                                   
                                     <th>
                                         &nbsp;
                                     </th>
@@ -42,27 +31,16 @@
                             <tbody>
                                 @foreach($activities as $key => $activity)
                                     <tr data-entry-id="{{ $activity->id }}">
+                                     
                                         <td>
-                                            {{ $activity->id ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $activity->user->name ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $activity->task->name ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $activity->total_interact ?? '' }}
+                                            {{ $activity->created_at ?? '' }}
                                         </td>
                                         <td>
                                             {{ $activity->total_amount ?? '' }}
                                         </td>
                                         <td>
                                             {{ $activity->total_gas_spend ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ App\Models\Activity::DONE_RADIO[$activity->done] ?? '' }}
-                                        </td>
+                                        </td> 
                                         <td>
                                             @can('activity_show')
                                                 <a class="btn btn-xs btn-primary" href="{{ route('frontend.activities.show', $activity->id) }}">

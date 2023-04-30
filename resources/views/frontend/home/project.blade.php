@@ -1,5 +1,3 @@
-@extends('layouts.frontend')
-@section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -14,7 +12,7 @@
             @endcan
             <div class="card">
                 <div class="card-header">
-                    {{ trans('cruds.project.title_singular') }} {{ trans('global.list') }}
+                    your ongoing project
                 </div>
 
                 <div class="card-body">
@@ -44,7 +42,22 @@
                                 </tr>
                          
                             </thead>
-                            <tbody>
+                            <tbody>  
+                                @if(empty($projects))
+                                <tr>
+                                    <td colspan="6">
+                                        <div class="text-center">
+                                        <p>ดูเหมือนว่าคุณจะไม่ได้เริ่มทำเควสเลย</p>
+                                        <div class="col-lg-12">
+                                            <a class="btn btn-success" href="{{ route('frontend.projects.index') }}">
+                                               เพิ่มกิจกรรม
+                                            </a>
+                                        </div>
+                                       </div>
+                                    </td>
+                                </tr>
+                                @else
+                               
                                 @foreach($projects as $key => $project)
                                     <tr data-entry-id="{{ $project->id }}">
                                       
@@ -93,6 +106,7 @@
 
                                     </tr>
                                 @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -102,75 +116,3 @@
         </div>
     </div>
 </div>
-@endsection
-@section('scripts')
-@parent
-<script>
-    $(function () {
-  let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('project_delete')
-  let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
-  let deleteButton = {
-    text: deleteButtonTrans,
-    url: "{{ route('frontend.projects.massDestroy') }}",
-    className: 'btn-danger',
-    action: function (e, dt, node, config) {
-      var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
-          return $(entry).data('entry-id')
-      });
-
-      if (ids.length === 0) {
-        alert('{{ trans('global.datatables.zero_selected') }}')
-
-        return
-      }
-
-      if (confirm('{{ trans('global.areYouSure') }}')) {
-        $.ajax({
-          headers: {'x-csrf-token': _token},
-          method: 'POST',
-          url: config.url,
-          data: { ids: ids, _method: 'DELETE' }})
-          .done(function () { location.reload() })
-      }
-    }
-  }
-  dtButtons.push(deleteButton)
-@endcan
-
-  $.extend(true, $.fn.dataTable.defaults, {
-    orderCellsTop: true,
-    order: [[ 1, 'desc' ]],
-    pageLength: 100,
-  });
-  let table = $('.datatable-Project:not(.ajaxTable)').DataTable({ buttons: dtButtons })
-  $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
-      $($.fn.dataTable.tables(true)).DataTable()
-          .columns.adjust();
-  });
-  
-let visibleColumnsIndexes = null;
-$('.datatable thead').on('input', '.search', function () {
-      let strict = $(this).attr('strict') || false
-      let value = strict && this.value ? "^" + this.value + "$" : this.value
-
-      let index = $(this).parent().index()
-      if (visibleColumnsIndexes !== null) {
-        index = visibleColumnsIndexes[index]
-      }
-
-      table
-        .column(index)
-        .search(value, strict)
-        .draw()
-  });
-table.on('column-visibility.dt', function(e, settings, column, state) {
-      visibleColumnsIndexes = []
-      table.columns(":visible").every(function(colIdx) {
-          visibleColumnsIndexes.push(colIdx);
-      });
-  })
-})
-
-</script>
-@endsection

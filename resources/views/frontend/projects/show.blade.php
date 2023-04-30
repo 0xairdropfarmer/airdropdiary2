@@ -86,30 +86,6 @@
                                         @endforeach
                                     </td>
                                 </tr>
-                                <tr>
-                                    <th>
-                                        {{ trans('cruds.project.fields.logo') }}
-                                    </th>
-                                    <td>
-                                        @if($project->logo)
-                                            <a href="{{ $project->logo->getUrl() }}" target="_blank" style="display: inline-block">
-                                                <img src="{{ $project->logo->getUrl('thumb') }}">
-                                            </a>
-                                        @endif
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        {{ trans('cruds.project.fields.cover') }}
-                                    </th>
-                                    <td>
-                                        @if($project->cover)
-                                            <a href="{{ $project->cover->getUrl() }}" target="_blank" style="display: inline-block">
-                                                <img src="{{ $project->cover->getUrl('thumb') }}">
-                                            </a>
-                                        @endif
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                         <div class="form-group">
@@ -117,6 +93,9 @@
                                 {{ trans('global.back_to_list') }}
                             </a>
                         </div>
+                                 
+                                @include('frontend.projects.relationships.projectTasks', ['tasks' => $project->projectTasks,'tasks_done'=>$tasks_done,'total_actions'=>$total_actions])
+                         
                     </div>
                 </div>
             </div>

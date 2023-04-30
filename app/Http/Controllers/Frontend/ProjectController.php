@@ -14,7 +14,7 @@ use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
-
+use Illuminate\Support\Facades\DB;
 class ProjectController extends Controller
 {
     use MediaUploadingTrait;
@@ -110,9 +110,15 @@ class ProjectController extends Controller
     {
         abort_if(Gate::denies('project_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $project->load('categories', 'tags', 'projectTasks');
-
-        return view('frontend.projects.show', compact('project'));
+        $project->load('categories', 'tags', 'projectTasks'); 
+        // dd($project->projectTasks->pluck('id'));
+        $tasks_done = \App\Models\Activity::where('user_id', auth()->id())->whereIn('task_id',$project->projectTasks->pluck('id'))->pluck('task_id');
+        // dd($tasks_done);
+        $total_actions = DB::table('activities')->where('user_id', auth()->id())
+    ->select('activities.task_id', DB::raw('SUM(total_amount) as total_amount , SUM(total_gas_spend) as total_gas_spend,COUNT(*) as interact_total'))
+    ->groupBy('task_id')
+    ->get(); 
+        return view('frontend.projects.show', compact('project','tasks_done','total_actions'));
     }
 
     public function destroy(Project $project)

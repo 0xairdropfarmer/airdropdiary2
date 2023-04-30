@@ -21,10 +21,7 @@
                     <tr>
                         <th width="10">
 
-                        </th>
-                        <th>
-                            {{ trans('cruds.project.fields.id') }}
-                        </th>
+                        </th> 
                         <th>
                             {{ trans('cruds.project.fields.name') }}
                         </th>
@@ -110,10 +107,7 @@
                         <tr data-entry-id="{{ $project->id }}">
                             <td>
 
-                            </td>
-                            <td>
-                                {{ $project->id ?? '' }}
-                            </td>
+                            </td> 
                             <td>
                                 {{ $project->name ?? '' }}
                             </td>
