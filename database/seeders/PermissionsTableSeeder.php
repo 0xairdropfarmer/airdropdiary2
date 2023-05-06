@@ -204,6 +204,26 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 49,
+                'title' => 'todo_create',
+            ],
+            [
+                'id'    => 50,
+                'title' => 'todo_edit',
+            ],
+            [
+                'id'    => 51,
+                'title' => 'todo_show',
+            ],
+            [
+                'id'    => 52,
+                'title' => 'todo_delete',
+            ],
+            [
+                'id'    => 53,
+                'title' => 'todo_access',
+            ],
+            [
+                'id'    => 54,
                 'title' => 'profile_password_edit',
             ],
         ];
