@@ -239,5 +239,27 @@ return [
             'deleted_at_helper'      => ' ',
         ],
     ],
+    'todo' => [
+        'title'          => 'Todo',
+        'title_singular' => 'Todo',
+        'fields'         => [
+            'id'                => 'ID',
+            'id_helper'         => ' ',
+            'task'              => 'Task',
+            'task_helper'       => ' ',
+            'due_date'          => 'Due Date',
+            'due_date_helper'   => ' ',
+            'notes'             => 'Notes',
+            'notes_helper'      => 'notes',
+            'status'            => 'Status',
+            'status_helper'     => ' ',
+            'created_at'        => 'Created at',
+            'created_at_helper' => ' ',
+            'updated_at'        => 'Updated at',
+            'updated_at_helper' => ' ',
+            'deleted_at'        => 'Deleted at',
+            'deleted_at_helper' => ' ',
+        ],
+    ],
 
 ];

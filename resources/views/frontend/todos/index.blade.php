@@ -3,45 +3,36 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            @can('activity_create')
+            @can('todo_create')
                 <div style="margin-bottom: 10px;" class="row">
                     <div class="col-lg-12">
-                        <a class="btn btn-success" href="{{ route('frontend.activities.create') }}">
-                            {{ trans('global.add') }} {{ trans('cruds.activity.title_singular') }}
+                        <a class="btn btn-success" href="{{ route('frontend.todos.create') }}">
+                            {{ trans('global.add') }} {{ trans('cruds.todo.title_singular') }}
                         </a>
                     </div>
                 </div>
             @endcan
             <div class="card">
                 <div class="card-header">
-                    {{ trans('cruds.activity.title_singular') }} {{ trans('global.list') }}
+                    {{ trans('cruds.todo.title_singular') }} {{ trans('global.list') }}
                 </div>
 
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class=" table table-bordered table-striped table-hover datatable datatable-Activity">
+                        <table class=" table table-bordered table-striped table-hover datatable datatable-Todo">
                             <thead>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.activity.fields.id') }}
+                                        {{ trans('cruds.todo.fields.id') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.activity.fields.user') }}
+                                        {{ trans('cruds.todo.fields.task') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.activity.fields.task') }}
+                                        {{ trans('cruds.todo.fields.due_date') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.activity.fields.total_interact') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.activity.fields.total_amount') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.activity.fields.total_gas_spend') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.activity.fields.done') }}
+                                        {{ trans('cruds.todo.fields.status') }}
                                     </th>
                                     <th>
                                         &nbsp;
@@ -49,44 +40,35 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($activities as $key => $activity)
-                                    <tr data-entry-id="{{ $activity->id }}">
+                                @foreach($todos as $key => $todo)
+                                    <tr data-entry-id="{{ $todo->id }}">
                                         <td>
-                                            {{ $activity->id ?? '' }}
+                                            {{ $todo->id ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $activity->user->name ?? '' }}
+                                            {{ $todo->task->name ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $activity->task->name ?? '' }}
+                                            {{ $todo->due_date ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $activity->total_interact ?? '' }}
+                                            {{ App\Models\Todo::STATUS_RADIO[$todo->status] ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $activity->total_amount ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $activity->total_gas_spend ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ App\Models\Activity::DONE_RADIO[$activity->done] ?? '' }}
-                                        </td>
-                                        <td>
-                                            @can('activity_show')
-                                                <a class="btn btn-xs btn-primary" href="{{ route('frontend.activities.show', $activity->id) }}">
+                                            @can('todo_show')
+                                                <a class="btn btn-xs btn-primary" href="{{ route('frontend.todos.show', $todo->id) }}">
                                                     {{ trans('global.view') }}
                                                 </a>
                                             @endcan
 
-                                            @can('activity_edit')
-                                                <a class="btn btn-xs btn-info" href="{{ route('frontend.activities.edit', $activity->id) }}">
+                                            @can('todo_edit')
+                                                <a class="btn btn-xs btn-info" href="{{ route('frontend.todos.edit', $todo->id) }}">
                                                     {{ trans('global.edit') }}
                                                 </a>
                                             @endcan
 
-                                            @can('activity_delete')
-                                                <form action="{{ route('frontend.activities.destroy', $activity->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                            @can('todo_delete')
+                                                <form action="{{ route('frontend.todos.destroy', $todo->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                     <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
@@ -112,11 +94,11 @@
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('activity_delete')
+@can('todo_delete')
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('frontend.activities.massDestroy') }}",
+    url: "{{ route('frontend.todos.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
@@ -144,10 +126,10 @@
 
   $.extend(true, $.fn.dataTable.defaults, {
     orderCellsTop: true,
-    order: [[ 1, 'desc' ]],
-    pageLength: 100,
+    order: [[ 2, 'desc' ]],
+    pageLength: 25,
   });
-  let table = $('.datatable-Activity:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+  let table = $('.datatable-Todo:not(.ajaxTable)').DataTable({ buttons: dtButtons })
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
