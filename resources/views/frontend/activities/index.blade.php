@@ -13,12 +13,7 @@
                         <table class=" table table-bordered table-striped table-hover datatable datatable-Activity">
                             <thead>
                                 <tr>
-                                    <th>
-                                        {{ trans('cruds.activity.fields.id') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.activity.fields.user') }}
-                                    </th>
+                                
                                     <th>
                                         {{ trans('cruds.activity.fields.task') }}
                                     </th>
@@ -42,12 +37,7 @@
                             <tbody>
                                 @foreach($activities as $key => $activity)
                                     <tr data-entry-id="{{ $activity->id }}">
-                                        <td>
-                                            {{ $activity->id ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $activity->user->name ?? '' }}
-                                        </td>
+                                      
                                         <td>
                                             {{ $activity->task->name ?? '' }}
                                         </td>

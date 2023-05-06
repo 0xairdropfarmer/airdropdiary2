@@ -35,22 +35,22 @@
                              
                             </td> 
                             <td>
-                                @can('task_show')  
-                                @if(!empty($tasks_done)) 
-                                  @foreach($tasks_done as $key => $task_done)
-                                  
-                                    @if($task_done == $task->id) 
-                                    <a class="btn btn-xs btn-success disabled">
-                                         done
-                                    </a> 
-                                    @break
-                                    @else  
-                                        <a class="btn btn-xs btn-primary" href="{{ route('frontend.activities.create',  ['id' => $task->id,'name'=>$task->name]) }}">
-                                            Mark as done
-                                        </a>
-                                    @endif 
-                                   
-                                    @endforeach
+                                @can('task_show')   
+                                    @if($tasks_done->count() > 0) 
+                                        @foreach($tasks_done as $key => $task_done)
+                                    
+                                            @if($task_done == $task->id) 
+                                            <a class="btn btn-xs btn-success disabled">
+                                                done
+                                            </a> 
+                                            @break
+                                            @else  
+                                                <a class="btn btn-xs btn-primary" href="{{ route('frontend.activities.create',  ['id' => $task->id,'name'=>$task->name]) }}">
+                                                    Mark as done
+                                                </a>
+                                            @endif 
+                                    
+                                        @endforeach
                                     @else
                                     <a class="btn btn-xs btn-primary" href="{{ route('frontend.activities.create',  ['id' => $task->id,'name'=>$task->name]) }}">
                                         Mark as done
@@ -139,7 +139,7 @@
                                 @can('task_show')  
                              
                                         <a class="btn btn-xs btn-primary" href="{{ route('frontend.activities.create',  ['id' => $task->id,'name'=>$task->name]) }}">
-                                            Add more action
+                                           เพิ่มกิจกรรม
                                         </a>
                                   
                                 @endcan
