@@ -105,6 +105,9 @@
                             {{ trans('cruds.task.fields.name') }}
                         </th>
                         <th>
+                            {{ trans('cruds.task.fields.expire_date') }}
+                        </th>
+                        <th>
                            destination task Link
                         </th> 
                         <th>
@@ -132,6 +135,10 @@
                             <td>
                                 {{ $task->name ?? '' }}
                             </td>
+                             
+                                <td>
+                                    {{ $task->expire_date }}
+                                </td> 
                             <td>
                                 <a class="btn btn-xs btn-info" target="_blank" href=" {{ $task->link ?? '' }}" >
                                  View Link

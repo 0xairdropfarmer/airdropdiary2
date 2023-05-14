@@ -78,14 +78,6 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.task.fields.expire_date') }}
-                                    </th>
-                                    <td>
-                                        {{ $task->expire_date }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
                                         {{ trans('cruds.project.fields.tag') }}
                                     </th>
                                     <td>
