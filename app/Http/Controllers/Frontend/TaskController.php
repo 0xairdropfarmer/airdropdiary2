@@ -69,7 +69,7 @@ class TaskController extends Controller
     {
         abort_if(Gate::denies('task_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $task->load('project', 'taskActivities');
+        $task->load('project', 'taskActivities', 'taskRecurringActivities');
 
         return view('frontend.tasks.show', compact('task'));
     }
