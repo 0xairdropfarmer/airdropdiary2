@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\Auditable;
+use Carbon\Carbon;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -22,12 +23,6 @@ class Task extends Model implements HasMedia
         'description',
     ];
 
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
-
     public const PHASE_RADIO = [
         'testnet' => 'testnet',
         'mainnet' => 'mainnet',
@@ -38,6 +33,13 @@ class Task extends Model implements HasMedia
         'recurring' => 'Recurring',
     ];
 
+    protected $dates = [
+        'expire_date',
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
+
     protected $fillable = [
         'project_id',
         'name',
@@ -45,6 +47,7 @@ class Task extends Model implements HasMedia
         'link',
         'type',
         'phase',
+        'expire_date',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -74,5 +77,15 @@ class Task extends Model implements HasMedia
     public function project()
     {
         return $this->belongsTo(Project::class, 'project_id');
+    }
+
+    public function getExpireDateAttribute($value)
+    {
+        return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('panel.date_format') . ' ' . config('panel.time_format')) : null;
+    }
+
+    public function setExpireDateAttribute($value)
+    {
+        $this->attributes['expire_date'] = $value ? Carbon::createFromFormat(config('panel.date_format') . ' ' . config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
     }
 }
