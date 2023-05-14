@@ -129,7 +129,11 @@
                                             {{ trans('cruds.activity.title') }}
                                         </a>
                                     @endcan 
-
+                                    @can('todo_access')
+                                    <a class="dropdown-item" href="{{ route('frontend.todos.index') }}">
+                                        {{ trans('cruds.todo.title') }}
+                                    </a>
+                                @endcan
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}

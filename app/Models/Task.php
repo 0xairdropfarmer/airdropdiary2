@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-
+use Carbon\Carbon;
 class Task extends Model implements HasMedia
 {
     use SoftDeletes, InteractsWithMedia, Auditable, HasFactory;
@@ -26,8 +26,7 @@ class Task extends Model implements HasMedia
         'created_at',
         'updated_at',
         'deleted_at',
-    ];
-
+    ]; 
     public const PHASE_RADIO = [
         'testnet' => 'testnet',
         'mainnet' => 'mainnet',
@@ -45,6 +44,7 @@ class Task extends Model implements HasMedia
         'link',
         'type',
         'phase',
+        'expire_date',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -54,7 +54,15 @@ class Task extends Model implements HasMedia
     {
         return $date->format('Y-m-d H:i:s');
     }
+    public function getExpireDateAttribute($value)
+    {
+        return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('panel.date_format') . ' ' . config('panel.time_format')) : null;
+    }
 
+    public function setExpireDateAttribute($value)
+    {
+        $this->attributes['expire_date'] = $value ? Carbon::createFromFormat(config('panel.date_format') . ' ' . config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
+    }
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')->fit('crop', 50, 50);

@@ -19,7 +19,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Audit Logs
     Route::resource('audit-logs', 'AuditLogsController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
-
+    // Todo
+    Route::delete('todos/destroy', 'TodoController@massDestroy')->name('todos.massDestroy');
+    Route::post('todos/media', 'TodoController@storeMedia')->name('todos.storeMedia');
+    Route::post('todos/ckmedia', 'TodoController@storeCKEditorImages')->name('todos.storeCKEditorImages');
+    Route::resource('todos', 'TodoController');
     // Project
     Route::delete('projects/destroy', 'ProjectController@massDestroy')->name('projects.massDestroy');
     Route::post('projects/media', 'ProjectController@storeMedia')->name('projects.storeMedia');
@@ -78,6 +82,11 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
     Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
     Route::resource('users', 'UsersController');
 
+    // Todo
+    Route::delete('todos/destroy', 'TodoController@massDestroy')->name('todos.massDestroy');
+    Route::post('todos/media', 'TodoController@storeMedia')->name('todos.storeMedia');
+    Route::post('todos/ckmedia', 'TodoController@storeCKEditorImages')->name('todos.storeCKEditorImages');
+    Route::resource('todos', 'TodoController');
     // Project
     Route::delete('projects/destroy', 'ProjectController@massDestroy')->name('projects.massDestroy');
     Route::post('projects/media', 'ProjectController@storeMedia')->name('projects.storeMedia');

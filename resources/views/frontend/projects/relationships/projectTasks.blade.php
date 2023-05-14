@@ -16,6 +16,9 @@
                             {{ trans('cruds.task.fields.link') }}
                         </th> 
                         <th>
+                            {{ trans('cruds.task.fields.expire_date') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -35,6 +38,9 @@
                              
                             </td> 
                             <td>
+                                {{ $task->expire_date ?? '' }}
+                            </td>
+                            <td>
                                 @can('task_show')   
                                     @if($tasks_done->count() > 0) 
                                         @foreach($tasks_done as $key => $task_done)
@@ -48,6 +54,13 @@
                                                 <a class="btn btn-xs btn-primary" href="{{ route('frontend.activities.create',  ['id' => $task->id,'name'=>$task->name]) }}">
                                                     Mark as done
                                                 </a>
+                                                @can('todo_create') 
+                             
+                                                <a class="btn btn-xs btn-warning" href="{{ route('frontend.todos.create',  ['id' => $task->id,'name'=>$task->name]) }}">
+                                                   เก็บไว้ทำวันหลัง
+                                                </a>
+                                           
+                                                @endcan
                                             @endif 
                                     
                                         @endforeach
@@ -55,8 +68,16 @@
                                     <a class="btn btn-xs btn-primary" href="{{ route('frontend.activities.create',  ['id' => $task->id,'name'=>$task->name]) }}">
                                         Mark as done
                                     </a>
+                                    @can('todo_create') 
+                             
+                                    <a class="btn btn-xs btn-warning" href="{{ route('frontend.todos.create',  ['id' => $task->id,'name'=>$task->name]) }}">
+                                       เก็บไว้ทำวันหลัง
+                                    </a>
+                               
+                                    @endcan
                                     @endif
                                 @endcan
+                              
 
                                
 
@@ -141,7 +162,13 @@
                                         <a class="btn btn-xs btn-primary" href="{{ route('frontend.activities.create',  ['id' => $task->id,'name'=>$task->name]) }}">
                                            เพิ่มกิจกรรม
                                         </a>
-                                  
+                                        @can('todo_create') 
+                             
+                                        <a class="btn btn-xs btn-warning" href="{{ route('frontend.todos.create',  ['id' => $task->id,'name'=>$task->name]) }}">
+                                           เก็บไว้ทำวันหลัง
+                                        </a>
+                                   
+                                        @endcan
                                 @endcan
 
                                
