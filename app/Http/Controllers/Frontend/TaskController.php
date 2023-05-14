@@ -22,7 +22,7 @@ class TaskController extends Controller
     {
         abort_if(Gate::denies('task_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $tasks = Task::with(['project'])->get();
+        $tasks = Task::where('user_id',auth()->id())->with(['project'])->get();
 
         return view('frontend.tasks.index', compact('tasks'));
     }
