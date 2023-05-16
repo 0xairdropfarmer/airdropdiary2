@@ -121,17 +121,27 @@
                     {{ trans('cruds.activity.title') }}
                 </a>
             </li>
-        @endcan  
-          @can('todo_access')
-        <li class="c-sidebar-nav-item">
-            <a href="{{ route("admin.todos.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/todos") || request()->is("admin/todos/*") ? "c-active" : "" }}">
-                <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
+        @endcan
+        @can('recurring_activity_access')
+            <li class="c-sidebar-nav-item">
+                <a href="{{ route("admin.recurring-activities.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/recurring-activities") || request()->is("admin/recurring-activities/*") ? "c-active" : "" }}">
+                    <i class="fa-fw fas fa-chart-bar c-sidebar-nav-icon">
 
-                </i>
-                {{ trans('cruds.todo.title') }}
-            </a>
-        </li>
-    @endcan
+                    </i>
+                    {{ trans('cruds.recurringActivity.title') }}
+                </a>
+            </li>
+        @endcan
+        @can('todo_access')
+            <li class="c-sidebar-nav-item">
+                <a href="{{ route("admin.todos.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/todos") || request()->is("admin/todos/*") ? "c-active" : "" }}">
+                    <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
+
+                    </i>
+                    {{ trans('cruds.todo.title') }}
+                </a>
+            </li>
+        @endcan
         @if(file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))
             @can('profile_password_edit')
                 <li class="c-sidebar-nav-item">

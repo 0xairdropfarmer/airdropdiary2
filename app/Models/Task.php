@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\Auditable;
+use Carbon\Carbon;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Carbon\Carbon;
+
 class Task extends Model implements HasMedia
 {
     use SoftDeletes, InteractsWithMedia, Auditable, HasFactory;
@@ -22,11 +23,6 @@ class Task extends Model implements HasMedia
         'description',
     ];
 
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ]; 
     public const PHASE_RADIO = [
         'testnet' => 'testnet',
         'mainnet' => 'mainnet',
@@ -35,6 +31,13 @@ class Task extends Model implements HasMedia
     public const TYPE_RADIO = [
         'onetime'   => 'one time',
         'recurring' => 'Recurring',
+    ];
+
+    protected $dates = [
+        'expire_date',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -54,15 +57,7 @@ class Task extends Model implements HasMedia
     {
         return $date->format('Y-m-d H:i:s');
     }
-    public function getExpireDateAttribute($value)
-    {
-        return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('panel.date_format') . ' ' . config('panel.time_format')) : null;
-    }
 
-    public function setExpireDateAttribute($value)
-    {
-        $this->attributes['expire_date'] = $value ? Carbon::createFromFormat(config('panel.date_format') . ' ' . config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
-    }
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')->fit('crop', 50, 50);
@@ -82,5 +77,15 @@ class Task extends Model implements HasMedia
     public function project()
     {
         return $this->belongsTo(Project::class, 'project_id');
+    }
+
+    public function getExpireDateAttribute($value)
+    {
+        return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('panel.date_format') . ' ' . config('panel.time_format')) : null;
+    }
+
+    public function setExpireDateAttribute($value)
+    {
+        $this->attributes['expire_date'] = $value ? Carbon::createFromFormat(config('panel.date_format') . ' ' . config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
     }
 }

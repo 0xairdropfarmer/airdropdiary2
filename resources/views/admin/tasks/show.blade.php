@@ -80,7 +80,6 @@
                         </td>
                     </tr>
                 </tbody>
-                </tbody>
             </table>
             <div class="form-group">
                 <a class="btn btn-default" href="{{ route('admin.tasks.index') }}">

@@ -43,6 +43,9 @@
                         <th>
                             {{ trans('cruds.task.fields.expire_date') }}
                         </th>
+                        <th>
+                            &nbsp;
+                        </th>
                     </tr>
                 </thead>
                 <tbody>

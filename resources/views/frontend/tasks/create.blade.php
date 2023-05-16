@@ -88,6 +88,16 @@
                             <span class="help-block">{{ trans('cruds.task.fields.phase_helper') }}</span>
                         </div>
                         <div class="form-group">
+                            <label for="expire_date">{{ trans('cruds.task.fields.expire_date') }}</label>
+                            <input class="form-control datetime" type="text" name="expire_date" id="expire_date" value="{{ old('expire_date') }}">
+                            @if($errors->has('expire_date'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('expire_date') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.task.fields.expire_date_helper') }}</span>
+                        </div>
+                        <div class="form-group">
                             <button class="btn btn-danger" type="submit">
                                 {{ trans('global.save') }}
                             </button>

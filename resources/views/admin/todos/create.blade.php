@@ -87,18 +87,23 @@
                 xhr.setRequestHeader('x-csrf-token', window._token);
                 xhr.setRequestHeader('Accept', 'application/json');
                 xhr.responseType = 'json';
+
                 // Init listeners
                 var genericErrorText = `Couldn't upload file: ${ file.name }.`;
                 xhr.addEventListener('error', function() { reject(genericErrorText) });
                 xhr.addEventListener('abort', function() { reject() });
                 xhr.addEventListener('load', function() {
                   var response = xhr.response;
+
                   if (!response || xhr.status !== 201) {
                     return reject(response && response.message ? `${genericErrorText}\n${xhr.status} ${response.message}` : `${genericErrorText}\n ${xhr.status} ${xhr.statusText}`);
                   }
+
                   $('form').append('<input type="hidden" name="ck-media[]" value="' + response.id + '">');
+
                   resolve({ default: response.url });
                 });
+
                 if (xhr.upload) {
                   xhr.upload.addEventListener('progress', function(e) {
                     if (e.lengthComputable) {
@@ -107,6 +112,7 @@
                     }
                   });
                 }
+
                 // Send request
                 var data = new FormData();
                 data.append('upload', file);
@@ -118,6 +124,7 @@
       };
     }
   }
+
   var allEditors = document.querySelectorAll('.ckeditor');
   for (var i = 0; i < allEditors.length; ++i) {
     ClassicEditor.create(

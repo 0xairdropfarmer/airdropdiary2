@@ -32,6 +32,10 @@ class UpdateUserRequest extends FormRequest
                 'required',
                 'array',
             ],
+            'expire_at' => [
+                'date_format:' . config('panel.date_format'),
+                'nullable',
+            ],
         ];
     }
 }
