@@ -72,6 +72,31 @@
                 <span class="help-block">{{ trans('cruds.user.fields.roles_helper') }}</span>
             </div>
             <div class="form-group">
+                <label>{{ trans('cruds.user.fields.membership_type') }}</label>
+                <select class="form-control {{ $errors->has('membership_type') ? 'is-invalid' : '' }}" name="membership_type" id="membership_type">
+                    <option value disabled {{ old('membership_type', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach(App\Models\User::MEMBERSHIP_TYPE_SELECT as $key => $label)
+                        <option value="{{ $key }}" {{ old('membership_type', $user->membership_type) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('membership_type'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('membership_type') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.membership_type_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="expire_at">{{ trans('cruds.user.fields.expire_at') }}</label>
+                <input class="form-control date {{ $errors->has('expire_at') ? 'is-invalid' : '' }}" type="text" name="expire_at" id="expire_at" value="{{ old('expire_at', $user->expire_at) }}">
+                @if($errors->has('expire_at'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('expire_at') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.expire_at_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>
