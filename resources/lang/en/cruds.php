@@ -65,6 +65,10 @@ return [
             'deleted_at_helper'        => ' ',
             'approved'                 => 'Approved',
             'approved_helper'          => ' ',
+            'membership_type'          => 'Membership Type',
+            'membership_type_helper'   => ' ',
+            'expire_at'                => 'Expire At',
+            'expire_at_helper'         => 'membership expire date',
         ],
     ],
     'auditLog' => [
@@ -261,8 +265,6 @@ return [
             'updated_at_helper' => ' ',
             'deleted_at'        => 'Deleted at',
             'deleted_at_helper' => ' ',
-            'expire_date'        => 'Expire Date',
-            'expire_date_helper' => ' ',
         ],
     ],
 

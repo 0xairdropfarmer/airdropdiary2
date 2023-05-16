@@ -30,6 +30,16 @@
                 <span class="help-block">{{ trans('cruds.user.fields.email_helper') }}</span>
             </div>
             <div class="form-group">
+                <label class="required" for="password">{{ trans('cruds.user.fields.password') }}</label>
+                <input class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" type="password" name="password" id="password" required>
+                @if($errors->has('password'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('password') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.password_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <div class="form-check {{ $errors->has('approved') ? 'is-invalid' : '' }}">
                     <input type="hidden" name="approved" value="0">
                     <input class="form-check-input" type="checkbox" name="approved" id="approved" value="1" {{ old('approved', 0) == 1 ? 'checked' : '' }}>
@@ -41,16 +51,6 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.user.fields.approved_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label class="required" for="password">{{ trans('cruds.user.fields.password') }}</label>
-                <input class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" type="password" name="password" id="password" required>
-                @if($errors->has('password'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('password') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.user.fields.password_helper') }}</span>
             </div>
             <div class="form-group">
                 <label class="required" for="roles">{{ trans('cruds.user.fields.roles') }}</label>
@@ -69,6 +69,31 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.user.fields.roles_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label>{{ trans('cruds.user.fields.membership_type') }}</label>
+                <select class="form-control {{ $errors->has('membership_type') ? 'is-invalid' : '' }}" name="membership_type" id="membership_type">
+                    <option value disabled {{ old('membership_type', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach(App\Models\User::MEMBERSHIP_TYPE_SELECT as $key => $label)
+                        <option value="{{ $key }}" {{ old('membership_type', 'annually') === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('membership_type'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('membership_type') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.membership_type_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="expire_at">{{ trans('cruds.user.fields.expire_at') }}</label>
+                <input class="form-control date {{ $errors->has('expire_at') ? 'is-invalid' : '' }}" type="text" name="expire_at" id="expire_at" value="{{ old('expire_at') }}">
+                @if($errors->has('expire_at'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('expire_at') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.expire_at_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

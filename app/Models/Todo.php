@@ -29,12 +29,9 @@ class Todo extends Model implements HasMedia
         'pending'   => 'Pending',
         'done'      => 'Done',
     ];
-    protected $attributes = [
-        'status' => 'not_start',
-    ];
+
     protected $fillable = [
         'task_id',
-        'user_id',
         'due_date',
         'notes',
         'status',
@@ -58,10 +55,7 @@ class Todo extends Model implements HasMedia
     {
         return $this->belongsTo(Task::class, 'task_id');
     }
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
+
     public function getDueDateAttribute($value)
     {
         return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('panel.date_format') . ' ' . config('panel.time_format')) : null;

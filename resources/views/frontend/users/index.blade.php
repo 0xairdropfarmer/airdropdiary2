@@ -41,6 +41,12 @@
                                         {{ trans('cruds.user.fields.roles') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.user.fields.membership_type') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.user.fields.expire_at') }}
+                                    </th>
+                                    <th>
                                         &nbsp;
                                     </th>
                                 </tr>
@@ -68,6 +74,12 @@
                                             @foreach($user->roles as $key => $item)
                                                 <span>{{ $item->title }}</span>
                                             @endforeach
+                                        </td>
+                                        <td>
+                                            {{ App\Models\User::MEMBERSHIP_TYPE_SELECT[$user->membership_type] ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $user->expire_at ?? '' }}
                                         </td>
                                         <td>
                                             @can('user_show')
