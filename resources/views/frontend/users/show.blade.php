@@ -68,6 +68,22 @@
                                         @endforeach
                                     </td>
                                 </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.user.fields.membership_type') }}
+                                    </th>
+                                    <td>
+                                        {{ App\Models\User::MEMBERSHIP_TYPE_SELECT[$user->membership_type] ?? '' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.user.fields.expire_at') }}
+                                    </th>
+                                    <td>
+                                        {{ $user->expire_at }}
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <div class="form-group">

@@ -19,17 +19,9 @@ class ActivityController extends Controller
     {
         abort_if(Gate::denies('activity_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $activities = Activity::where('user_id',auth()->id())->with(['user', 'task'])->get();
+        $activities = Activity::with(['user', 'task'])->get();
 
         return view('frontend.activities.index', compact('activities'));
-    }
-    public function recurring_task_view($id)
-    {
-        abort_if(Gate::denies('activity_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
- 
-        $activities = Activity::where('user_id',auth()->id())->where('task_id',$id)->get();
-
-        return view('frontend.activities.recurring_task', compact('activities'));
     }
 
     public function create()

@@ -80,7 +80,6 @@
                         </td>
                     </tr>
                 </tbody>
-                </tbody>
             </table>
             <div class="form-group">
                 <a class="btn btn-default" href="{{ route('admin.tasks.index') }}">
@@ -102,8 +101,8 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#task_recurring_activities" role="tab" data-toggle="tab">
-                {{ trans('cruds.recurringActivity.title') }}
+            <a class="nav-link" href="#task_strategies" role="tab" data-toggle="tab">
+                {{ trans('cruds.strategy.title') }}
             </a>
         </li>
     </ul>
@@ -111,8 +110,8 @@
         <div class="tab-pane" role="tabpanel" id="task_activities">
             @includeIf('admin.tasks.relationships.taskActivities', ['activities' => $task->taskActivities])
         </div>
-        <div class="tab-pane" role="tabpanel" id="task_recurring_activities">
-            @includeIf('admin.tasks.relationships.taskRecurringActivities', ['recurringActivities' => $task->taskRecurringActivities])
+        <div class="tab-pane" role="tabpanel" id="task_strategies">
+            @includeIf('admin.tasks.relationships.taskStrategies', ['strategies' => $task->taskStrategies])
         </div>
     </div>
 </div>

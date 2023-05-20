@@ -52,13 +52,6 @@
                                     {{ __('Dashboard') }}
                                 </a>
                             </li>
-                            @can('project_access')
-                            <li class="nav-item">
-                            <a class="nav-link" href="{{ route('frontend.projects.index') }}">
-                                {{ trans('cruds.project.title') }}
-                            </a>
-                        </li>
-                        @endcan
                         @endguest
                     </ul>
 
@@ -128,12 +121,18 @@
                                         <a class="dropdown-item" href="{{ route('frontend.activities.index') }}">
                                             {{ trans('cruds.activity.title') }}
                                         </a>
-                                    @endcan 
+                                    @endcan
                                     @can('todo_access')
-                                    <a class="dropdown-item" href="{{ route('frontend.todos.index') }}">
-                                        {{ trans('cruds.todo.title') }}
-                                    </a>
-                                @endcan
+                                        <a class="dropdown-item" href="{{ route('frontend.todos.index') }}">
+                                            {{ trans('cruds.todo.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('strategy_access')
+                                        <a class="dropdown-item" href="{{ route('frontend.strategies.index') }}">
+                                            {{ trans('cruds.strategy.title') }}
+                                        </a>
+                                    @endcan
+
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
