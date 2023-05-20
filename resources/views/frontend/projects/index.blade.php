@@ -23,9 +23,14 @@
                             <thead>
                                 <tr>
                                     <th>
+                                        {{ trans('cruds.project.fields.id') }}
+                                    </th>
+                                    <th>
                                         {{ trans('cruds.project.fields.name') }}
                                     </th>
-                                   
+                                    <th>
+                                        {{ trans('cruds.project.fields.live') }}
+                                    </th>
                                     <th>
                                         {{ trans('cruds.project.fields.airdropcf') }}
                                     </th>
@@ -39,19 +44,79 @@
                                         {{ trans('cruds.project.fields.tag') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.project.fields.logo') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.project.fields.cover') }}
+                                    </th>
+                                    <th>
                                         &nbsp;
                                     </th>
                                 </tr>
-                         
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <select class="search" strict="true">
+                                            <option value>{{ trans('global.all') }}</option>
+                                            @foreach(App\Models\Project::LIVE_RADIO as $key => $item)
+                                                <option value="{{ $item }}">{{ $item }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select class="search" strict="true">
+                                            <option value>{{ trans('global.all') }}</option>
+                                            @foreach(App\Models\Project::AIRDROPCF_RADIO as $key => $item)
+                                                <option value="{{ $item }}">{{ $item }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <select class="search">
+                                            <option value>{{ trans('global.all') }}</option>
+                                            @foreach($categories as $key => $item)
+                                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select class="search">
+                                            <option value>{{ trans('global.all') }}</option>
+                                            @foreach($tags as $key => $item)
+                                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
                             </thead>
                             <tbody>
                                 @foreach($projects as $key => $project)
                                     <tr data-entry-id="{{ $project->id }}">
-                                      
+                                        <td>
+                                            {{ $project->id ?? '' }}
+                                        </td>
                                         <td>
                                             {{ $project->name ?? '' }}
                                         </td>
-                                        
+                                        <td>
+                                            {{ App\Models\Project::LIVE_RADIO[$project->live] ?? '' }}
+                                        </td>
                                         <td>
                                             {{ App\Models\Project::AIRDROPCF_RADIO[$project->airdropcf] ?? '' }}
                                         </td>
@@ -67,6 +132,20 @@
                                             @foreach($project->tags as $key => $item)
                                                 <span>{{ $item->name }}</span>
                                             @endforeach
+                                        </td>
+                                        <td>
+                                            @if($project->logo)
+                                                <a href="{{ $project->logo->getUrl() }}" target="_blank" style="display: inline-block">
+                                                    <img src="{{ $project->logo->getUrl('thumb') }}">
+                                                </a>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($project->cover)
+                                                <a href="{{ $project->cover->getUrl() }}" target="_blank" style="display: inline-block">
+                                                    <img src="{{ $project->cover->getUrl('thumb') }}">
+                                                </a>
+                                            @endif
                                         </td>
                                         <td>
                                             @can('project_show')
