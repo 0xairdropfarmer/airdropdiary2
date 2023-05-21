@@ -245,6 +245,7 @@ return [
             'deleted_at_helper'      => ' ',
         ],
     ],
+    
     'todo' => [
         'title'          => 'Todo',
         'title_singular' => 'Todo',
@@ -265,6 +266,29 @@ return [
             'updated_at_helper' => ' ',
             'deleted_at'        => 'Deleted at',
             'deleted_at_helper' => ' ',
+            'expire_date'        => 'Expire Date',
+            'expire_date_helper' => ' ',
+        ],
+        
+    ],
+    'strategy' => [
+        'title'          => 'Strategy',
+        'title_singular' => 'Strategy',
+        'fields'         => [
+            'id'                 => 'ID',
+            'id_helper'          => ' ',
+            'name'               => 'Name',
+            'name_helper'        => ' ',
+            'task'               => 'Task',
+            'task_helper'        => ' ',
+            'cover'              => 'Cover',
+            'cover_helper'       => ' ',
+            'created_at'         => 'Created at',
+            'created_at_helper'  => ' ',
+            'updated_at'         => 'Updated at',
+            'updated_at_helper'  => ' ',
+            'deleted_at'         => 'Deleted at',
+            'deleted_at_helper'  => ' ',
             'expire_date'        => 'Expire Date',
             'expire_date_helper' => ' ',
         ],

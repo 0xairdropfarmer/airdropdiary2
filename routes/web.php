@@ -29,6 +29,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('projects/media', 'ProjectController@storeMedia')->name('projects.storeMedia');
     Route::post('projects/ckmedia', 'ProjectController@storeCKEditorImages')->name('projects.storeCKEditorImages');
     Route::resource('projects', 'ProjectController');
+    
+       // Strategy
+       Route::delete('strategies/destroy', 'StrategyController@massDestroy')->name('strategies.massDestroy');
+       Route::post('strategies/media', 'StrategyController@storeMedia')->name('strategies.storeMedia');
+       Route::post('strategies/ckmedia', 'StrategyController@storeCKEditorImages')->name('strategies.storeCKEditorImages');
+       Route::resource('strategies', 'StrategyController');
 
     // Categories
     Route::delete('categories/destroy', 'CategoriesController@massDestroy')->name('categories.massDestroy');
@@ -98,7 +104,12 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
     Route::post('categories/media', 'CategoriesController@storeMedia')->name('categories.storeMedia');
     Route::post('categories/ckmedia', 'CategoriesController@storeCKEditorImages')->name('categories.storeCKEditorImages');
     Route::resource('categories', 'CategoriesController');
-
+    
+    // Strategy
+    Route::delete('strategies/destroy', 'StrategyController@massDestroy')->name('strategies.massDestroy');
+    Route::post('strategies/media', 'StrategyController@storeMedia')->name('strategies.storeMedia');
+    Route::post('strategies/ckmedia', 'StrategyController@storeCKEditorImages')->name('strategies.storeCKEditorImages');
+    Route::resource('strategies', 'StrategyController');
     // Tag
     Route::delete('tags/destroy', 'TagController@massDestroy')->name('tags.massDestroy');
     Route::post('tags/media', 'TagController@storeMedia')->name('tags.storeMedia');
