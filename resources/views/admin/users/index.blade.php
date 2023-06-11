@@ -47,6 +47,9 @@
                             {{ trans('cruds.user.fields.expire_at') }}
                         </th>
                         <th>
+                            {{ trans('cruds.user.fields.wallet_address') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -83,6 +86,9 @@
                             </td>
                             <td>
                                 {{ $user->expire_at ?? '' }}
+                            </td>
+                            <td>
+                                {{ $user->wallet_address ?? '' }}
                             </td>
                             <td>
                                 @can('user_show')

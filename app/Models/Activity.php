@@ -27,7 +27,7 @@ class Activity extends Model
     protected $fillable = [
         'user_id',
         'task_id',
-        'note',
+        'total_interact',
         'total_amount',
         'total_gas_spend',
         'done',

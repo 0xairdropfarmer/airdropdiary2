@@ -43,6 +43,12 @@
                         <th>
                             {{ trans('cruds.task.fields.expire_date') }}
                         </th>
+                        <th>
+                            {{ trans('cruds.task.fields.contract_address') }}
+                        </th>
+                        <th>
+                            &nbsp;
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -71,6 +77,9 @@
                             </td>
                             <td>
                                 {{ $task->expire_date ?? '' }}
+                            </td>
+                            <td>
+                                {{ $task->contract_address ?? '' }}
                             </td>
                             <td>
                                 @can('task_show')
