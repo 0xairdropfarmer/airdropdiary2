@@ -29,13 +29,13 @@
                             {{ trans('cruds.strategy.fields.name') }}
                         </th>
                         <th>
-                            {{ trans('cruds.strategy.fields.task') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.strategy.fields.cover') }}
                         </th>
                         <th>
                             {{ trans('cruds.strategy.fields.expire_date') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.strategy.fields.task') }}
                         </th>
                         <th>
                             &nbsp;
@@ -55,11 +55,6 @@
                                 {{ $strategy->name ?? '' }}
                             </td>
                             <td>
-                                @foreach($strategy->tasks as $key => $item)
-                                    <span class="badge badge-info">{{ $item->name }}</span>
-                                @endforeach
-                            </td>
-                            <td>
                                 @if($strategy->cover)
                                     <a href="{{ $strategy->cover->getUrl() }}" target="_blank" style="display: inline-block">
                                         <img src="{{ $strategy->cover->getUrl('thumb') }}">
@@ -68,6 +63,9 @@
                             </td>
                             <td>
                                 {{ $strategy->expire_date ?? '' }}
+                            </td>
+                            <td>
+                                {{ $strategy->task->name ?? '' }}
                             </td>
                             <td>
                                 @can('strategy_show')

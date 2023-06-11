@@ -24,24 +24,6 @@
                             <span class="help-block">{{ trans('cruds.strategy.fields.name_helper') }}</span>
                         </div>
                         <div class="form-group">
-                            <label for="tasks">{{ trans('cruds.strategy.fields.task') }}</label>
-                            <div style="padding-bottom: 4px">
-                                <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
-                                <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
-                            </div>
-                            <select class="form-control select2" name="tasks[]" id="tasks" multiple>
-                                @foreach($tasks as $id => $task)
-                                    <option value="{{ $id }}" {{ in_array($id, old('tasks', [])) ? 'selected' : '' }}>{{ $task }}</option>
-                                @endforeach
-                            </select>
-                            @if($errors->has('tasks'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('tasks') }}
-                                </div>
-                            @endif
-                            <span class="help-block">{{ trans('cruds.strategy.fields.task_helper') }}</span>
-                        </div>
-                        <div class="form-group">
                             <label for="cover">{{ trans('cruds.strategy.fields.cover') }}</label>
                             <div class="needsclick dropzone" id="cover-dropzone">
                             </div>
@@ -61,6 +43,20 @@
                                 </div>
                             @endif
                             <span class="help-block">{{ trans('cruds.strategy.fields.expire_date_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="task_id">{{ trans('cruds.strategy.fields.task') }}</label>
+                            <select class="form-control select2" name="task_id" id="task_id">
+                                @foreach($tasks as $id => $entry)
+                                    <option value="{{ $id }}" {{ old('task_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('task'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('task') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.strategy.fields.task_helper') }}</span>
                         </div>
                         <div class="form-group">
                             <button class="btn btn-danger" type="submit">
