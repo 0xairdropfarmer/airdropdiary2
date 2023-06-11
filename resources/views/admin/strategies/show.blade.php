@@ -30,7 +30,7 @@
                         <td>
                             {{ $strategy->name }}
                         </td>
-                    </tr> 
+                    </tr>
                     <tr>
                         <th>
                             {{ trans('cruds.strategy.fields.cover') }}
@@ -51,6 +51,14 @@
                             {{ $strategy->expire_date }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.strategy.fields.task') }}
+                        </th>
+                        <td>
+                            {{ $strategy->task->name ?? '' }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">
@@ -61,18 +69,7 @@
         </div>
     </div>
 </div>
-<div class="card">
-    <div class="card-header">
-        {{ trans('global.relatedData') }}
-    </div>
-    
-    <div class="tab-content">
-        <div class="tab-pane" role="tabpanel" id="task_activities">
-            @include('frontend.strategies.relationships.taskStrategies', ['tasks' => $strategy->tasks])
-           
-        </div> 
-    </div>
-</div>
+
 
 
 @endsection

@@ -15,6 +15,8 @@ class CreateTasksTable extends Migration
             $table->string('link')->nullable();
             $table->string('type')->nullable();
             $table->string('phase')->nullable();
+            $table->datetime('expire_date')->nullable();
+            $table->string('contract_address')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

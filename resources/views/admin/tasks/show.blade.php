@@ -79,7 +79,14 @@
                             {{ $task->expire_date }}
                         </td>
                     </tr>
-                </tbody>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.task.fields.contract_address') }}
+                        </th>
+                        <td>
+                            {{ $task->contract_address }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">
@@ -101,18 +108,10 @@
                 {{ trans('cruds.activity.title') }}
             </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#task_recurring_activities" role="tab" data-toggle="tab">
-                {{ trans('cruds.recurringActivity.title') }}
-            </a>
-        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="task_activities">
             @includeIf('admin.tasks.relationships.taskActivities', ['activities' => $task->taskActivities])
-        </div>
-        <div class="tab-pane" role="tabpanel" id="task_recurring_activities">
-            @includeIf('admin.tasks.relationships.taskRecurringActivities', ['recurringActivities' => $task->taskRecurringActivities])
         </div>
     </div>
 </div>
