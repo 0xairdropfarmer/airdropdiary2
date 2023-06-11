@@ -3,6 +3,15 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
+            @can('activity_create')
+                <div style="margin-bottom: 10px;" class="row">
+                    <div class="col-lg-12">
+                        <a class="btn btn-success" href="{{ route('frontend.activities.create') }}">
+                            {{ trans('global.add') }} {{ trans('cruds.activity.title_singular') }}
+                        </a>
+                    </div>
+                </div>
+            @endcan
             <div class="card">
                 <div class="card-header">
                     {{ trans('cruds.activity.title_singular') }} {{ trans('global.list') }}
@@ -13,7 +22,12 @@
                         <table class=" table table-bordered table-striped table-hover datatable datatable-Activity">
                             <thead>
                                 <tr>
-                                
+                                    <th>
+                                        {{ trans('cruds.activity.fields.id') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.activity.fields.user') }}
+                                    </th>
                                     <th>
                                         {{ trans('cruds.activity.fields.task') }}
                                     </th>
@@ -37,7 +51,12 @@
                             <tbody>
                                 @foreach($activities as $key => $activity)
                                     <tr data-entry-id="{{ $activity->id }}">
-                                      
+                                        <td>
+                                            {{ $activity->id ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $activity->user->name ?? '' }}
+                                        </td>
                                         <td>
                                             {{ $activity->task->name ?? '' }}
                                         </td>

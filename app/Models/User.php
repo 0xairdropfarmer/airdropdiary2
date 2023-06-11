@@ -27,25 +27,28 @@ class User extends Authenticatable
 
     protected $dates = [
         'email_verified_at',
+        'expire_at',
         'created_at',
         'updated_at',
         'deleted_at',
-        'expire_at',
     ];
+
     public const MEMBERSHIP_TYPE_SELECT = [
         'monthly'         => 'monthly',
         'annually'        => 'annually',
         'Founding Member' => 'Founding Member',
     ];
+
     protected $fillable = [
         'name',
         'email',
         'email_verified_at',
-        'approved',
         'password',
+        'approved',
+        'remember_token',
         'membership_type',
         'expire_at',
-        'remember_token',
+        'wallet_address',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -71,23 +74,10 @@ class User extends Authenticatable
             }
         });
     }
-    public function getExpireAtAttribute($value)
-    {
-        return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
-    }
 
-    public function setExpireAtAttribute($value)
-    {
-        $this->attributes['expire_at'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
-    }
     public function userActivities()
     {
         return $this->hasMany(Activity::class, 'user_id', 'id');
-    }
-
-    public function userRecurringActivities()
-    {
-        return $this->hasMany(RecurringActivity::class, 'user_id', 'id');
     }
 
     public function getEmailVerifiedAtAttribute($value)
@@ -115,5 +105,15 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    public function getExpireAtAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
+    }
+
+    public function setExpireAtAttribute($value)
+    {
+        $this->attributes['expire_at'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
     }
 }

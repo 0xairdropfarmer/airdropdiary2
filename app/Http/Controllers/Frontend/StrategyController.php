@@ -22,7 +22,7 @@ class StrategyController extends Controller
     {
         abort_if(Gate::denies('strategy_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $strategies = Strategy::with(['tasks', 'media'])->get();
+        $strategies = Strategy::with(['task', 'media'])->get();
 
         return view('frontend.strategies.index', compact('strategies'));
     }
@@ -31,7 +31,7 @@ class StrategyController extends Controller
     {
         abort_if(Gate::denies('strategy_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $tasks = Task::pluck('name', 'id');
+        $tasks = Task::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         return view('frontend.strategies.create', compact('tasks'));
     }
@@ -39,7 +39,7 @@ class StrategyController extends Controller
     public function store(StoreStrategyRequest $request)
     {
         $strategy = Strategy::create($request->all());
-        $strategy->tasks()->sync($request->input('tasks', []));
+
         if ($request->input('cover', false)) {
             $strategy->addMedia(storage_path('tmp/uploads/' . basename($request->input('cover'))))->toMediaCollection('cover');
         }
@@ -55,9 +55,9 @@ class StrategyController extends Controller
     {
         abort_if(Gate::denies('strategy_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $tasks = Task::pluck('name', 'id');
+        $tasks = Task::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $strategy->load('tasks');
+        $strategy->load('task');
 
         return view('frontend.strategies.edit', compact('strategy', 'tasks'));
     }
@@ -65,7 +65,7 @@ class StrategyController extends Controller
     public function update(UpdateStrategyRequest $request, Strategy $strategy)
     {
         $strategy->update($request->all());
-        $strategy->tasks()->sync($request->input('tasks', []));
+
         if ($request->input('cover', false)) {
             if (! $strategy->cover || $request->input('cover') !== $strategy->cover->file_name) {
                 if ($strategy->cover) {
@@ -84,11 +84,8 @@ class StrategyController extends Controller
     {
         abort_if(Gate::denies('strategy_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $strategy->load('tasks');
-        
-        $tasks_done = \App\Models\Activity::where('user_id', auth()->id())
-        ->whereIn('task_id',$strategy->tasks()->pluck('id'))->pluck('task_id');
-        // dd($tasks_done);
+        $strategy->load('task');
+
         return view('frontend.strategies.show', compact('strategy'));
     }
 
