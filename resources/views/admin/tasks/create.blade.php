@@ -94,6 +94,16 @@
                 <span class="help-block">{{ trans('cruds.task.fields.expire_date_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="contract_address">{{ trans('cruds.task.fields.contract_address') }}</label>
+                <input class="form-control {{ $errors->has('contract_address') ? 'is-invalid' : '' }}" type="text" name="contract_address" id="contract_address" value="{{ old('contract_address', '') }}">
+                @if($errors->has('contract_address'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('contract_address') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.task.fields.contract_address_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

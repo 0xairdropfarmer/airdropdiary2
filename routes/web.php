@@ -19,22 +19,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Audit Logs
     Route::resource('audit-logs', 'AuditLogsController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
-    // Todo
-    Route::delete('todos/destroy', 'TodoController@massDestroy')->name('todos.massDestroy');
-    Route::post('todos/media', 'TodoController@storeMedia')->name('todos.storeMedia');
-    Route::post('todos/ckmedia', 'TodoController@storeCKEditorImages')->name('todos.storeCKEditorImages');
-    Route::resource('todos', 'TodoController');
+
     // Project
     Route::delete('projects/destroy', 'ProjectController@massDestroy')->name('projects.massDestroy');
     Route::post('projects/media', 'ProjectController@storeMedia')->name('projects.storeMedia');
     Route::post('projects/ckmedia', 'ProjectController@storeCKEditorImages')->name('projects.storeCKEditorImages');
     Route::resource('projects', 'ProjectController');
-    
-       // Strategy
-       Route::delete('strategies/destroy', 'StrategyController@massDestroy')->name('strategies.massDestroy');
-       Route::post('strategies/media', 'StrategyController@storeMedia')->name('strategies.storeMedia');
-       Route::post('strategies/ckmedia', 'StrategyController@storeCKEditorImages')->name('strategies.storeCKEditorImages');
-       Route::resource('strategies', 'StrategyController');
 
     // Categories
     Route::delete('categories/destroy', 'CategoriesController@massDestroy')->name('categories.massDestroy');
@@ -58,9 +48,17 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('activities/destroy', 'ActivityController@massDestroy')->name('activities.massDestroy');
     Route::resource('activities', 'ActivityController');
 
-    // Recurring Activity
-    Route::delete('recurring-activities/destroy', 'RecurringActivityController@massDestroy')->name('recurring-activities.massDestroy');
-    Route::resource('recurring-activities', 'RecurringActivityController');
+    // Todo
+    Route::delete('todos/destroy', 'TodoController@massDestroy')->name('todos.massDestroy');
+    Route::post('todos/media', 'TodoController@storeMedia')->name('todos.storeMedia');
+    Route::post('todos/ckmedia', 'TodoController@storeCKEditorImages')->name('todos.storeCKEditorImages');
+    Route::resource('todos', 'TodoController');
+
+    // Strategy
+    Route::delete('strategies/destroy', 'StrategyController@massDestroy')->name('strategies.massDestroy');
+    Route::post('strategies/media', 'StrategyController@storeMedia')->name('strategies.storeMedia');
+    Route::post('strategies/ckmedia', 'StrategyController@storeCKEditorImages')->name('strategies.storeCKEditorImages');
+    Route::resource('strategies', 'StrategyController');
 
     Route::get('global-search', 'GlobalSearchController@search')->name('globalSearch');
 });
@@ -88,11 +86,6 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
     Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
     Route::resource('users', 'UsersController');
 
-    // Todo
-    Route::delete('todos/destroy', 'TodoController@massDestroy')->name('todos.massDestroy');
-    Route::post('todos/media', 'TodoController@storeMedia')->name('todos.storeMedia');
-    Route::post('todos/ckmedia', 'TodoController@storeCKEditorImages')->name('todos.storeCKEditorImages');
-    Route::resource('todos', 'TodoController');
     // Project
     Route::delete('projects/destroy', 'ProjectController@massDestroy')->name('projects.massDestroy');
     Route::post('projects/media', 'ProjectController@storeMedia')->name('projects.storeMedia');
@@ -104,12 +97,7 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
     Route::post('categories/media', 'CategoriesController@storeMedia')->name('categories.storeMedia');
     Route::post('categories/ckmedia', 'CategoriesController@storeCKEditorImages')->name('categories.storeCKEditorImages');
     Route::resource('categories', 'CategoriesController');
-    
-    // Strategy
-    Route::delete('strategies/destroy', 'StrategyController@massDestroy')->name('strategies.massDestroy');
-    Route::post('strategies/media', 'StrategyController@storeMedia')->name('strategies.storeMedia');
-    Route::post('strategies/ckmedia', 'StrategyController@storeCKEditorImages')->name('strategies.storeCKEditorImages');
-    Route::resource('strategies', 'StrategyController');
+
     // Tag
     Route::delete('tags/destroy', 'TagController@massDestroy')->name('tags.massDestroy');
     Route::post('tags/media', 'TagController@storeMedia')->name('tags.storeMedia');
@@ -124,10 +112,19 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
 
     // Activity
     Route::delete('activities/destroy', 'ActivityController@massDestroy')->name('activities.massDestroy');
-    
-    Route::get('activities/recurring_view/{id}', 'ActivityController@recurring_task_view')->name('activities.recurringTaskView');
     Route::resource('activities', 'ActivityController');
-    // Recurring Activity 
+
+    // Todo
+    Route::delete('todos/destroy', 'TodoController@massDestroy')->name('todos.massDestroy');
+    Route::post('todos/media', 'TodoController@storeMedia')->name('todos.storeMedia');
+    Route::post('todos/ckmedia', 'TodoController@storeCKEditorImages')->name('todos.storeCKEditorImages');
+    Route::resource('todos', 'TodoController');
+
+    // Strategy
+    Route::delete('strategies/destroy', 'StrategyController@massDestroy')->name('strategies.massDestroy');
+    Route::post('strategies/media', 'StrategyController@storeMedia')->name('strategies.storeMedia');
+    Route::post('strategies/ckmedia', 'StrategyController@storeCKEditorImages')->name('strategies.storeCKEditorImages');
+    Route::resource('strategies', 'StrategyController');
 
     Route::get('frontend/profile', 'ProfileController@index')->name('profile.index');
     Route::post('frontend/profile', 'ProfileController@update')->name('profile.update');

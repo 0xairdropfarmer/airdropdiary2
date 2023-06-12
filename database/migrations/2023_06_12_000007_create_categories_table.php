@@ -4,14 +4,15 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStrategiesTable extends Migration
+class CreateCategoriesTable extends Migration
 {
     public function up()
     {
-        Schema::create('strategies', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name')->nullable();
-            $table->date('expire_date')->nullable();
+            $table->string('name');
+            $table->longText('description')->nullable();
+            $table->string('blockscan_url')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

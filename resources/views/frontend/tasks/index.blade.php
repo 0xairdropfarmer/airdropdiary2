@@ -41,6 +41,12 @@
                                         {{ trans('cruds.task.fields.phase') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.task.fields.expire_date') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.task.fields.contract_address') }}
+                                    </th>
+                                    <th>
                                         &nbsp;
                                     </th>
                                 </tr>
@@ -65,6 +71,12 @@
                                         </td>
                                         <td>
                                             {{ App\Models\Task::PHASE_RADIO[$task->phase] ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $task->expire_date ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $task->contract_address ?? '' }}
                                         </td>
                                         <td>
                                             @can('task_show')

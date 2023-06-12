@@ -21,6 +21,10 @@ class StoreCategoryRequest extends FormRequest
                 'string',
                 'required',
             ],
+            'blockscan_url' => [
+                'string',
+                'nullable',
+            ],
         ];
     }
 }

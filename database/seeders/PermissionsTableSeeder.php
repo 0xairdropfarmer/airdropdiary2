@@ -184,43 +184,43 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 44,
-                'title' => 'recurring_activity_create',
-            ],
-            [
-                'id'    => 45,
-                'title' => 'recurring_activity_edit',
-            ],
-            [
-                'id'    => 46,
-                'title' => 'recurring_activity_show',
-            ],
-            [
-                'id'    => 47,
-                'title' => 'recurring_activity_delete',
-            ],
-            [
-                'id'    => 48,
-                'title' => 'recurring_activity_access',
-            ],
-            [
-                'id'    => 49,
                 'title' => 'todo_create',
             ],
             [
-                'id'    => 50,
+                'id'    => 45,
                 'title' => 'todo_edit',
             ],
             [
-                'id'    => 51,
+                'id'    => 46,
                 'title' => 'todo_show',
             ],
             [
-                'id'    => 52,
+                'id'    => 47,
                 'title' => 'todo_delete',
             ],
             [
-                'id'    => 53,
+                'id'    => 48,
                 'title' => 'todo_access',
+            ],
+            [
+                'id'    => 49,
+                'title' => 'strategy_create',
+            ],
+            [
+                'id'    => 50,
+                'title' => 'strategy_edit',
+            ],
+            [
+                'id'    => 51,
+                'title' => 'strategy_show',
+            ],
+            [
+                'id'    => 52,
+                'title' => 'strategy_delete',
+            ],
+            [
+                'id'    => 53,
+                'title' => 'strategy_access',
             ],
             [
                 'id'    => 54,

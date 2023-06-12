@@ -21,12 +21,6 @@ class UpdateStrategyRequest extends FormRequest
                 'string',
                 'nullable',
             ],
-            'tasks.*' => [
-                'integer',
-            ],
-            'tasks' => [
-                'array',
-            ],
             'expire_date' => [
                 'date_format:' . config('panel.date_format'),
                 'nullable',

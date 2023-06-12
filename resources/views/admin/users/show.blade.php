@@ -81,6 +81,14 @@
                             {{ $user->expire_at }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.user.fields.wallet_address') }}
+                        </th>
+                        <td>
+                            {{ $user->wallet_address }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">
@@ -102,18 +110,10 @@
                 {{ trans('cruds.activity.title') }}
             </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#user_recurring_activities" role="tab" data-toggle="tab">
-                {{ trans('cruds.recurringActivity.title') }}
-            </a>
-        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="user_activities">
             @includeIf('admin.users.relationships.userActivities', ['activities' => $user->userActivities])
-        </div>
-        <div class="tab-pane" role="tabpanel" id="user_recurring_activities">
-            @includeIf('admin.users.relationships.userRecurringActivities', ['recurringActivities' => $user->userRecurringActivities])
         </div>
     </div>
 </div>

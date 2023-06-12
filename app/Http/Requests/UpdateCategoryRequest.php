@@ -21,6 +21,10 @@ class UpdateCategoryRequest extends FormRequest
                 'string',
                 'required',
             ],
+            'blockscan_url' => [
+                'string',
+                'nullable',
+            ],
         ];
     }
 }

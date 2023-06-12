@@ -4,14 +4,19 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategoriesTable extends Migration
+class CreateTasksTable extends Migration
 {
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('tasks', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
             $table->longText('description')->nullable();
+            $table->string('link')->nullable();
+            $table->string('type')->nullable();
+            $table->string('phase')->nullable();
+            $table->datetime('expire_date')->nullable();
+            $table->string('contract_address')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

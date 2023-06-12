@@ -30,6 +30,7 @@ class Category extends Model implements HasMedia
     protected $fillable = [
         'name',
         'description',
+        'blockscan_url',
         'created_at',
         'updated_at',
         'deleted_at',
