@@ -36,6 +36,10 @@ class UpdateUserRequest extends FormRequest
                 'date_format:' . config('panel.date_format'),
                 'nullable',
             ],
+            'wallet_address' => [
+                'string',
+                'nullable',
+            ],
         ];
     }
 }

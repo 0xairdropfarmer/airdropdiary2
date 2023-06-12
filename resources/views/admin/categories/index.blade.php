@@ -32,6 +32,9 @@
                             {{ trans('cruds.category.fields.cover') }}
                         </th>
                         <th>
+                            {{ trans('cruds.category.fields.blockscan_url') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -54,6 +57,9 @@
                                         <img src="{{ $category->cover->getUrl('thumb') }}">
                                     </a>
                                 @endif
+                            </td>
+                            <td>
+                                {{ $category->blockscan_url ?? '' }}
                             </td>
                             <td>
                                 @can('category_show')

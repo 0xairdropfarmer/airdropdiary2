@@ -22,7 +22,7 @@ class TodoController extends Controller
     {
         abort_if(Gate::denies('todo_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $todos = Todo::where('user_id',auth()->id())->with(['task'])->get();
+        $todos = Todo::with(['task'])->get();
 
         return view('frontend.todos.index', compact('todos'));
     }

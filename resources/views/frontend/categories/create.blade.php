@@ -45,6 +45,16 @@
                             <span class="help-block">{{ trans('cruds.category.fields.cover_helper') }}</span>
                         </div>
                         <div class="form-group">
+                            <label for="blockscan_url">{{ trans('cruds.category.fields.blockscan_url') }}</label>
+                            <input class="form-control" type="text" name="blockscan_url" id="blockscan_url" value="{{ old('blockscan_url', '') }}">
+                            @if($errors->has('blockscan_url'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('blockscan_url') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.category.fields.blockscan_url_helper') }}</span>
+                        </div>
+                        <div class="form-group">
                             <button class="btn btn-danger" type="submit">
                                 {{ trans('global.save') }}
                             </button>

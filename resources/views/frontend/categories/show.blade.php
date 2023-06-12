@@ -54,6 +54,14 @@
                                         @endif
                                     </td>
                                 </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.category.fields.blockscan_url') }}
+                                    </th>
+                                    <td>
+                                        {{ $category->blockscan_url }}
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <div class="form-group">
